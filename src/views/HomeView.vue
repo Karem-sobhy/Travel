@@ -742,7 +742,7 @@ export default {
   methods: {
     dest1Change: function(e){
       if (this.dest1 == "") {
-      this.dest1Error = "destination is required";
+      this.dest1Error = "destination is requiredd";
     } else {
       this.dest1Error = "";
     }
