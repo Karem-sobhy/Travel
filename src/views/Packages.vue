@@ -1,38 +1,55 @@
 <script>
+// export default {
+//   mounted() {
+//     var owl = $("#testemonial-carousel");
+//     owl.owlCarousel({
+//       items: 3,
+//       margin: 0,
+//       loop: true,
+//       autoplay: true,
+//       smartSpeed: 1000,
+
+//       //nav:false,
+//       //navText:["<i class='fa fa-angle-left'></i>","<i class='fa fa-angle-right'></i>"],
+
+//       dots: true,
+//       autoplayHoverPause: true,
+
+//       responsiveClass: true,
+//       responsive: {
+//         0: {
+//           items: 1,
+//         },
+//         640: {
+//           items: 1,
+//         },
+//         767: {
+//           items: 2,
+//         },
+//         992: {
+//           items: 3,
+//         },
+//       },
+//     });
+//   },
+// };
 export default {
-  mounted() {
-    var owl = $("#testemonial-carousel");
-    owl.owlCarousel({
-      items: 3,
-      margin: 0,
-      loop: true,
-      autoplay: true,
-      smartSpeed: 1000,
-
-      //nav:false,
-      //navText:["<i class='fa fa-angle-left'></i>","<i class='fa fa-angle-right'></i>"],
-
-      dots: true,
-      autoplayHoverPause: true,
-
-      responsiveClass: true,
-      responsive: {
-        0: {
-          items: 1,
-        },
-        640: {
-          items: 1,
-        },
-        767: {
-          items: 2,
-        },
-        992: {
-          items: 3,
-        },
-      },
-    });
-  },
-};
+    data() {
+      return {
+        listItems: []
+      }
+    },
+    methods: {
+      async getData() {
+        const res = await fetch("http://127.0.0.1:8000/api/packages");
+        const finalRes = await res.json();
+        this.listItems = finalRes;
+      }
+    },
+    mounted() {
+      this.getData();
+    }
+  }
 </script>
 <template>
   <!--packages start-->
@@ -47,26 +64,17 @@ export default {
       <!--/.gallery-header-->
       <div class="packages-content">
         <div class="row">
-          <div class="col-md-4 col-sm-6">
+          <div v-for="item in listItems" class="col-md-4 col-sm-6">
             <div class="single-package-item">
               <img
                 src="/src/assets/images/packages/p1.jpg"
                 alt="package-place"
               />
               <div class="single-package-item-txt">
-                <h3>italy <span class="pull-right">$499</span></h3>
+                <h3>{{ item.name }} <span class="pull-right">${{ item.price }}</span></h3>
                 <div class="packages-para">
                   <p>
-                    <span>
-                      <i class="fa fa-angle-right"></i> 5 daays 6 nights
-                    </span>
-                    <i class="fa fa-angle-right"></i> 5 star accomodation
-                  </p>
-                  <p>
-                    <span>
-                      <i class="fa fa-angle-right"></i> transportation
-                    </span>
-                    <i class="fa fa-angle-right"></i> food facilities
+                    {{ item.description }}
                   </p>
                 </div>
                 <!--/.packages-para-->
@@ -77,232 +85,7 @@ export default {
                     <i class="fa fa-star"></i>
                     <i class="fa fa-star"></i>
                     <i class="fa fa-star"></i>
-                    <span>2544 review</span>
-                  </p>
-                </div>
-                <!--/.packages-review-->
-                <div class="about-btn">
-                  <button class="about-view packages-btn">book now</button>
-                </div>
-                <!--/.about-btn-->
-              </div>
-              <!--/.single-package-item-txt-->
-            </div>
-            <!--/.single-package-item-->
-          </div>
-          <!--/.col-->
-
-          <div class="col-md-4 col-sm-6">
-            <div class="single-package-item">
-              <img
-                src="/src/assets/images/packages/p2.jpg"
-                alt="package-place"
-              />
-              <div class="single-package-item-txt">
-                <h3>england <span class="pull-right">$1499</span></h3>
-                <div class="packages-para">
-                  <p>
-                    <span>
-                      <i class="fa fa-angle-right"></i> 5 daays 6 nights
-                    </span>
-                    <i class="fa fa-angle-right"></i> 5 star accomodation
-                  </p>
-                  <p>
-                    <span>
-                      <i class="fa fa-angle-right"></i> transportation
-                    </span>
-                    <i class="fa fa-angle-right"></i> food facilities
-                  </p>
-                </div>
-                <!--/.packages-para-->
-                <div class="packages-review">
-                  <p>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <span>2544 review</span>
-                  </p>
-                </div>
-                <!--/.packages-review-->
-                <div class="about-btn">
-                  <button class="about-view packages-btn">book now</button>
-                </div>
-                <!--/.about-btn-->
-              </div>
-              <!--/.single-package-item-txt-->
-            </div>
-            <!--/.single-package-item-->
-          </div>
-          <!--/.col-->
-
-          <div class="col-md-4 col-sm-6">
-            <div class="single-package-item">
-              <img
-                src="/src/assets/images/packages/p3.jpg"
-                alt="package-place"
-              />
-              <div class="single-package-item-txt">
-                <h3>france <span class="pull-right">$1199</span></h3>
-                <div class="packages-para">
-                  <p>
-                    <span>
-                      <i class="fa fa-angle-right"></i> 5 daays 6 nights
-                    </span>
-                    <i class="fa fa-angle-right"></i> 5 star accomodation
-                  </p>
-                  <p>
-                    <span>
-                      <i class="fa fa-angle-right"></i> transportation
-                    </span>
-                    <i class="fa fa-angle-right"></i> food facilities
-                  </p>
-                </div>
-                <!--/.packages-para-->
-                <div class="packages-review">
-                  <p>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <span>2544 review</span>
-                  </p>
-                </div>
-                <!--/.packages-review-->
-                <div class="about-btn">
-                  <button class="about-view packages-btn">book now</button>
-                </div>
-                <!--/.about-btn-->
-              </div>
-              <!--/.single-package-item-txt-->
-            </div>
-            <!--/.single-package-item-->
-          </div>
-          <!--/.col-->
-
-          <div class="col-md-4 col-sm-6">
-            <div class="single-package-item">
-              <img
-                src="/src/assets/images/packages/p4.jpg"
-                alt="package-place"
-              />
-              <div class="single-package-item-txt">
-                <h3>india <span class="pull-right">$799</span></h3>
-                <div class="packages-para">
-                  <p>
-                    <span>
-                      <i class="fa fa-angle-right"></i> 5 daays 6 nights
-                    </span>
-                    <i class="fa fa-angle-right"></i> 5 star accomodation
-                  </p>
-                  <p>
-                    <span>
-                      <i class="fa fa-angle-right"></i> transportation
-                    </span>
-                    <i class="fa fa-angle-right"></i> food facilities
-                  </p>
-                </div>
-                <!--/.packages-para-->
-                <div class="packages-review">
-                  <p>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <span>2544 review</span>
-                  </p>
-                </div>
-                <!--/.packages-review-->
-                <div class="about-btn">
-                  <button class="about-view packages-btn">book now</button>
-                </div>
-                <!--/.about-btn-->
-              </div>
-              <!--/.single-package-item-txt-->
-            </div>
-            <!--/.single-package-item-->
-          </div>
-          <!--/.col-->
-
-          <div class="col-md-4 col-sm-6">
-            <div class="single-package-item">
-              <img
-                src="/src/assets/images/packages/p5.jpg"
-                alt="package-place"
-              />
-              <div class="single-package-item-txt">
-                <h3>spain <span class="pull-right">$999</span></h3>
-                <div class="packages-para">
-                  <p>
-                    <span>
-                      <i class="fa fa-angle-right"></i> 5 daays 6 nights
-                    </span>
-                    <i class="fa fa-angle-right"></i> 5 star accomodation
-                  </p>
-                  <p>
-                    <span>
-                      <i class="fa fa-angle-right"></i> transportation
-                    </span>
-                    <i class="fa fa-angle-right"></i> food facilities
-                  </p>
-                </div>
-                <!--/.packages-para-->
-                <div class="packages-review">
-                  <p>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <span>2544 review</span>
-                  </p>
-                </div>
-                <!--/.packages-review-->
-                <div class="about-btn">
-                  <button class="about-view packages-btn">book now</button>
-                </div>
-                <!--/.about-btn-->
-              </div>
-              <!--/.single-package-item-txt-->
-            </div>
-            <!--/.single-package-item-->
-          </div>
-          <!--/.col-->
-
-          <div class="col-md-4 col-sm-6">
-            <div class="single-package-item">
-              <img
-                src="/src/assets/images/packages/p6.jpg"
-                alt="package-place"
-              />
-              <div class="single-package-item-txt">
-                <h3>thailand <span class="pull-right">$799</span></h3>
-                <div class="packages-para">
-                  <p>
-                    <span>
-                      <i class="fa fa-angle-right"></i> 5 daays 6 nights
-                    </span>
-                    <i class="fa fa-angle-right"></i> 5 star accomodation
-                  </p>
-                  <p>
-                    <span>
-                      <i class="fa fa-angle-right"></i> transportation
-                    </span>
-                    <i class="fa fa-angle-right"></i> food facilities
-                  </p>
-                </div>
-                <!--/.packages-para-->
-                <div class="packages-review">
-                  <p>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <span>2544 review</span>
+                    <span>{{ item.reviews }} review</span>
                   </p>
                 </div>
                 <!--/.packages-review-->
